@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <nav class="bg-[#4F46E5] text-white">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center gap-2 text-xl font-bold">
+                <i class="fa-solid fa-check"></i> TodoApp
+            </a>
+
+            {% if request.user.is_authenticated %}
+            
+                <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                    <div class="relative w-full">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <form action="" method="get">
+                            <input type="text" name="search" value="{{ request.GET.search }}" 
+                                class="w-full pl-10 pr-4 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-300" 
+                                placeholder="Search tasks...">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <span class="text-sm font-medium">Hello, {{ request.user.username }}! </span>
+                    
+                    <a href="{% url 'logout' %}">
+                        <button class="bg-[#4338ca] hover:bg-[#3730a3] px-4 py-1.5 rounded text-sm font-medium transition flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                        </button>
+                    </a>
+                </div>
+
+            {% else %}
+                <div class="flex gap-4">
+                    <a href="{% url 'login' %}" class="hover:text-gray-200">Login</a>
+                    <a href="{% url 'register' %}" class="hover:text-gray-200">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>
