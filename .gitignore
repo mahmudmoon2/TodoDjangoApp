@@ -1,0 +1,13 @@
+# Python and Django
+__pycache__/
+*.pyc
+db.sqlite3
+*.log
+
+# Virtual Environment (আপনার ফোল্ডারের নাম যদি env হয় তবে env/ দিন)
+venv/
+env/
+.env
+
+# VS Code settings
+.vscode/
